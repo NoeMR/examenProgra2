@@ -19,7 +19,8 @@ public class VentanaLogin extends javax.swing.JFrame {
      */
     
     public static String user = "user@gmail.com";
-    private String pass = "hola@123";
+    public static String pass = "hola@123";
+    
     public VentanaLogin() {
         initComponents();
         setLocationRelativeTo(null);

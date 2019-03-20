@@ -106,8 +106,7 @@ public class RestaurarPass extends javax.swing.JFrame {
         }
         
         if (especial == true && numero == true && letra == true) {
-            VentanaLogin v = new VentanaLogin();
-            v.pass;
+            VentanaLogin.pass = passNuevo;
         } else {
             JOptionPane.showMessageDialog(null, "no");
         }
