@@ -5,6 +5,7 @@
  */
 package examenprogra2;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,6 +47,12 @@ public class RestaurarPass extends javax.swing.JFrame {
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Ingrese su nueva contraseña");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+
+        jPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordKeyPressed(evt);
+            }
+        });
         getContentPane().add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 280, -1));
 
         jButton1.setText("Cambiar");
@@ -93,26 +100,46 @@ public class RestaurarPass extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        this.verificarPassword();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.verificarPassword();
+        }
+    }//GEN-LAST:event_jPasswordKeyPressed
+
+    private void verificarPassword() {
         String passNuevo = jPassword.getText();
-        boolean letra=false, numero=false, especial=false;
-        for (int i = 0; i < passNuevo.length(); i++) {
-            if (Character.isDigit(passNuevo.charAt(i))) {
-                numero = true;
-            } else if (Character.isLetter(passNuevo.charAt(i))) {
-                letra = true;
-            } else if ((passNuevo.charAt(i) >= 33 && passNuevo.charAt(i) <= 47) || (passNuevo.charAt(i) >= 58 && passNuevo.charAt(i) <= 64)
-                    || (passNuevo.charAt(i) >= 94 && passNuevo.charAt(i) <= 96) || (passNuevo.charAt(i) >= 123 && passNuevo.charAt(i) <= 126)
-                    || (passNuevo.charAt(i) >= 128 && passNuevo.charAt(i) <= 254)) {
-                especial = true;
+        if (passNuevo.equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo vacio");
+        } else {
+            boolean letra = false, numero = false, especial = false;
+            for (int i = 0; i < passNuevo.length(); i++) {
+                if (Character.isDigit(passNuevo.charAt(i))) {
+                    numero = true;
+                } else if (Character.isLetter(passNuevo.charAt(i))) {
+                    letra = true;
+                } else if ((passNuevo.charAt(i) >= 33 && passNuevo.charAt(i) <= 47) || (passNuevo.charAt(i) >= 58 && passNuevo.charAt(i) <= 64)
+                        || (passNuevo.charAt(i) >= 94 && passNuevo.charAt(i) <= 96) || (passNuevo.charAt(i) >= 123 && passNuevo.charAt(i) <= 126)
+                        || (passNuevo.charAt(i) >= 128 && passNuevo.charAt(i) <= 254)) {
+                    especial = true;
+                }
+            }
+
+            if (especial == true && numero == true && letra == true) {
+                VentanaLogin.pass = passNuevo;
+                JOptionPane.showMessageDialog(null, "Cambio realizado");
+                jPassword.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Password inválida: Debe contener al menos una letra, un número y un carácter especial");
+                jPassword.setText("");
+                jPassword.requestFocus();
             }
         }
-        
-        if (especial == true && numero == true && letra == true) {
-            VentanaLogin.pass = passNuevo;
-        } else {
-            JOptionPane.showMessageDialog(null, "Password inválida: Debe contener al menos una letra, un número y un carácter especial");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }
 
     /**
      * @param args the command line arguments

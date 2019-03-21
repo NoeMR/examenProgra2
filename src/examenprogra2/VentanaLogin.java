@@ -5,6 +5,7 @@
  */
 package examenprogra2;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -69,7 +70,6 @@ public class VentanaLogin extends javax.swing.JFrame {
         getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, -1, -1));
 
         lblPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/examenprogra2/imagenes/grupo1.png"))); // NOI18N
-        lblPerfil.setBorder(null);
         getContentPane().add(lblPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, 200));
 
         lblPass.setBackground(java.awt.Color.white);
@@ -93,7 +93,6 @@ public class VentanaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 110, -1));
 
-        txtUser.setBackground(java.awt.Color.white);
         txtUser.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         txtUser.setToolTipText("");
         txtUser.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.white));
@@ -104,12 +103,16 @@ public class VentanaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 230, 30));
 
-        password.setBackground(java.awt.Color.white);
         password.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         password.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.white));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
+            }
+        });
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordKeyPressed(evt);
             }
         });
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 230, 30));
@@ -143,9 +146,17 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
         // TODO add your handling code here:
-        
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.verificarLogin();
+        }
     }//GEN-LAST:event_txtUserKeyPressed
+
+    private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.verificarLogin();
+        }
+    }//GEN-LAST:event_passwordKeyPressed
 
     public void verificarLogin(){
        
