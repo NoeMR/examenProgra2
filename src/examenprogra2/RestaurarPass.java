@@ -100,7 +100,9 @@ public class RestaurarPass extends javax.swing.JFrame {
                 numero = true;
             } else if (Character.isLetter(passNuevo.charAt(i))) {
                 letra = true;
-            } else if (passNuevo.charAt(i) >= 33 && passNuevo.charAt(i) <= 47) {
+            } else if ((passNuevo.charAt(i) >= 33 && passNuevo.charAt(i) <= 47) || (passNuevo.charAt(i) >= 58 && passNuevo.charAt(i) <= 64)
+                    || (passNuevo.charAt(i) >= 94 && passNuevo.charAt(i) <= 96) || (passNuevo.charAt(i) >= 123 && passNuevo.charAt(i) <= 126)
+                    || (passNuevo.charAt(i) >= 128 && passNuevo.charAt(i) <= 254)) {
                 especial = true;
             }
         }
@@ -108,7 +110,7 @@ public class RestaurarPass extends javax.swing.JFrame {
         if (especial == true && numero == true && letra == true) {
             VentanaLogin.pass = passNuevo;
         } else {
-            JOptionPane.showMessageDialog(null, "no");
+            JOptionPane.showMessageDialog(null, "Password inválida: Debe contener al menos una letra, un número y un carácter especial");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
